@@ -1,0 +1,2 @@
+/usr/bin/ar qc libJKQTFastPlotterLib_.a  CMakeFiles/JKQTFastPlotterLib.dir/JKQTFastPlotterLib_autogen/mocs_compilation.cpp.o CMakeFiles/JKQTFastPlotterLib.dir/jkqtfastplotter.cpp.o
+/usr/bin/ranlib libJKQTFastPlotterLib_.a

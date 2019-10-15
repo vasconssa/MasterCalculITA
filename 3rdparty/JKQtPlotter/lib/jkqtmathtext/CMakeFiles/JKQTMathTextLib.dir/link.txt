@@ -1,0 +1,2 @@
+/usr/bin/ar qc libJKQTMathTextLib_.a  CMakeFiles/JKQTMathTextLib.dir/JKQTMathTextLib_autogen/mocs_compilation.cpp.o CMakeFiles/JKQTMathTextLib.dir/jkqtmathtext.cpp.o CMakeFiles/JKQTMathTextLib.dir/JKQTMathTextLib_autogen/3YJK5W5UP7/qrc_xits.cpp.o
+/usr/bin/ranlib libJKQTMathTextLib_.a
