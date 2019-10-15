@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Kalman Filter Visualizer</string>
+   <string>MasterCalculTA</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <property name="sizePolicy">
