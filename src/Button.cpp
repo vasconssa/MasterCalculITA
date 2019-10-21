@@ -23,9 +23,7 @@ void Button::paintEvent(QPaintEvent *event) {
     initStyleOption(&opt);
     p.drawComplexControl(QStyle::CC_ToolButton, opt);
     p.setRenderHint(QPainter::Antialiasing);
-    mathText.draw(p, Qt::AlignCenter, QRectF(0,0,this->width(), this->height()), false);
-    //QPainter painter;
-    //mathText.useXITS();
 
+    mathText.draw(p, Qt::AlignCenter, QRectF(0,0,this->width(), this->height()), false);
 
 }

@@ -21,8 +21,10 @@ void Interface::createMainArea() {
 
     mainAreaLayout->addWidget(display);
     mainAreaLayout->addWidget(keyboard);
+
     auto mainAreaWidget = new QWidget;
     mainAreaWidget->setLayout(mainAreaLayout);
+
     mainAreaStack = new QStackedWidget;
     mainAreaStack->addWidget(mainAreaWidget);
     canvasLayout->addWidget(mainAreaStack);
