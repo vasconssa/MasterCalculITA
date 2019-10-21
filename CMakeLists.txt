@@ -6,6 +6,37 @@ find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets Xml PrintSupport OpenGL Sv
 
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
+if(MSVC)
+    add_compile_options(/EHsc)
+    # To enable M_PI, M_E,...
+    add_definitions(/D_USE_MATH_DEFINES)
+    # To Prevent Errors with min() and max()
+    add_definitions(/DNOMINMAX)
+    # To fix error: C2338: va_start argument must not
+    # have reference type and must not be parenthesized
+    add_definitions(/D_CRT_NO_VA_START_VALIDATION)
+	if(BUILD_INCLUDE_XITS_FONTS)
+		add_definitions(/DAUTOLOAD_XITS_FONTS)
+		add_definitions(/DUSE_XITS_FONTS )
+	else()
+		add_definitions(/DNO_XITS_FONTS )
+	endif()
+	set(CMAKE_MSVCIDE_RUN_PATH ${CMAKE_PREFIX_PATH};${Qt5_DIR}/bin)
+else()
+    add_compile_options(-fexceptions)
+    if(BUILD_HIGH_COMPILE_WARNING_LEVEL)
+        add_compile_options(-Wall -Wextra) # -Wimplicit-fallthrough -Wuninitialized -Wmaybe-uninitialized) # -Wmisleading-indentation -Weffc++)
+    endif(BUILD_HIGH_COMPILE_WARNING_LEVEL)
+
+	if(BUILD_INCLUDE_XITS_FONTS)
+		add_definitions(-DAUTOLOAD_XITS_FONTS)
+		add_definitions(-DUSE_XITS_FONTS )
+	else()
+		add_definitions(-DNO_XITS_FONTS )
+	endif()
+endif()
+
+
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
