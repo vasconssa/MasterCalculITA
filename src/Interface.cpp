@@ -15,7 +15,7 @@ Interface::~Interface() {
 }
 
 void Interface::createMainArea() {
-    display = new QLineEdit;
+    display = new Display;
     auto mainAreaLayout = new QVBoxLayout;
     keyboard = new Keyboard;
 

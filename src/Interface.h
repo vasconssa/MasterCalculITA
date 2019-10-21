@@ -5,6 +5,7 @@
 #include <QGraphicsItem>
 #include <QtWidgets>
 #include "Keyboard.h"
+#include "Display.h"
 
 namespace Ui {
     class Interface;
@@ -21,7 +22,7 @@ private:
         void createMainArea();
 private:
         Ui::Interface *ui;
-        QLineEdit *display;
+        Display *display;
         Keyboard *keyboard;
         QVBoxLayout *leftSideBarLayout;
         QVBoxLayout *rightSideBarLayout;

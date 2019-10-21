@@ -11,9 +11,11 @@ class Button : public QToolButton
 protected:
     virtual void paintEvent(QPaintEvent *event) override;
 public:
-    explicit Button(const QString &text, QWidget *parent = nullptr);
+    explicit Button(const QString &latexText, QWidget *parent = nullptr);
 
     QSize sizeHint() const override;
+private:
+    JKQTMathText mathText;
 };
 
 #endif // BUTTON_H

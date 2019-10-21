@@ -8,10 +8,13 @@ class Keyboard : public QWidget {
 public:
     Keyboard(QWidget *parent = nullptr);
 private:
-    void createButtons();
+    void createNumericKeyboard();
 public:
     enum { NumDigitButtons = 10 };
     Button *digitButtons[NumDigitButtons];
+private:
+    QTabWidget *tabWidget;
+    QWidget *numericKeyboard;
 };
 
 #endif

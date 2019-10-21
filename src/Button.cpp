@@ -1,10 +1,11 @@
 #include "Button.h"
 
-Button::Button(const QString &text, QWidget *parent)
+Button::Button(const QString &latexText, QWidget *parent)
     : QToolButton(parent)
 {
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-    //setText(text);
+    mathText.setFontSize(15);
+    mathText.parse("$" + latexText + "$");
 }
 
 QSize Button::sizeHint() const
@@ -21,9 +22,7 @@ void Button::paintEvent(QPaintEvent *event) {
     QStyleOptionToolButton opt;
     initStyleOption(&opt);
     p.drawComplexControl(QStyle::CC_ToolButton, opt);
-    JKQTMathText mathText;
-    mathText.setFontSize(15);
-    mathText.parse("$\\alpha$");
+    p.setRenderHint(QPainter::Antialiasing);
     mathText.draw(p, Qt::AlignCenter, QRectF(0,0,this->width(), this->height()), false);
     //QPainter painter;
     //mathText.useXITS();

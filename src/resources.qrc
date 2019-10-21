@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/">
+      <file>resources/images/calculator.png</file>
       <file>resources/symbols/greek/01.png</file>
       <file>resources/symbols/greek/02.png</file>
       <file>resources/symbols/greek/03.png</file>
