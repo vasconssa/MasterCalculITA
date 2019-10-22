@@ -1,6 +1,6 @@
 #include "Keyboard.h"
 
-Keyboard::Keyboard(QWidget* parent) {
+Keyboard::Keyboard(Display* display, QWidget* parent):display(display) {
     createNumericKeyboard();
     tabWidget = new QTabWidget;
     tabWidget->addTab(numericKeyboard, QIcon(QString(":/resources/images/calculator.png")), "");
@@ -16,11 +16,11 @@ void Keyboard::createNumericKeyboard() {
     //numericLayout->setSizeConstraint(QLayout::SetFixedSize);
 
 
-    Button *radianButton = new Button("rad");
-    Button *asinButton = new Button("\\sin^{-1}");
-    Button *acosButton = new Button("\\cos^{-1}");
-    Button *atanButton = new Button("\\tan^{-1}");
-    Button *piButton = new Button("\\pi");
+    Button *radianButton = createButton("rad", SLOT(buttonClicked()));
+    Button *asinButton = createButton("\\sin^{-1}", SLOT(buttonClicked()));
+    Button *acosButton = createButton("\\cos^{-1}", SLOT(buttonClicked()));
+    Button *atanButton = createButton("\\tan^{-1}", SLOT(buttonClicked()));
+    Button *piButton = createButton("\\pi", SLOT(buttonClicked()));
 
     numericLayout->addWidget(radianButton, 1, 0);
     numericLayout->addWidget(asinButton,   2, 0);
@@ -28,11 +28,11 @@ void Keyboard::createNumericKeyboard() {
     numericLayout->addWidget(atanButton,   4, 0);
     numericLayout->addWidget(piButton,     5, 0);
 
-    Button *degreeButton = new Button("\\degree");
-    Button *sinButton = new Button("\\sin");
-    Button *cosButton = new Button("\\cos");
-    Button *tanButton = new Button("\\tan");
-    Button *eulerButton = new Button("e");
+    Button *degreeButton = createButton("\\degree", SLOT(buttonClicked()));
+    Button *sinButton = createButton("\\sin", SLOT(buttonClicked()));
+    Button *cosButton = createButton("\\cos", SLOT(buttonClicked()));
+    Button *tanButton = createButton("\\tan", SLOT(buttonClicked()));
+    Button *eulerButton = createButton("e", SLOT(buttonClicked()));
 
     numericLayout->addWidget(degreeButton, 1, 1);
     numericLayout->addWidget(sinButton,    2, 1);
@@ -40,11 +40,11 @@ void Keyboard::createNumericKeyboard() {
     numericLayout->addWidget(tanButton,    4, 1);
     numericLayout->addWidget(eulerButton,  5, 1);
 
-    Button *squareRootButton = new Button("\\sqrt{x}");
-    Button *lnButton = new Button("ln");
-    Button *logButton = new Button("log");
-    Button *power2Button = new Button("x^2");
-    Button *powerButton = new Button("x^n");
+    Button *squareRootButton = createButton("\\sqrt{x}", SLOT(buttonClicked()));
+    Button *lnButton = createButton("ln", SLOT(buttonClicked()));
+    Button *logButton = createButton("log", SLOT(buttonClicked()));
+    Button *power2Button = createButton("x^2", SLOT(buttonClicked()));
+    Button *powerButton = createButton("x^n", SLOT(buttonClicked()));
 
     numericLayout->addWidget(squareRootButton, 1, 2);
     numericLayout->addWidget(lnButton,         2, 2);
@@ -52,11 +52,11 @@ void Keyboard::createNumericKeyboard() {
     numericLayout->addWidget(power2Button,     4, 2);
     numericLayout->addWidget(powerButton,      5, 2);
 
-    Button *clearButton = new Button(tr("Clear"));
-    Button *divisionButton = new Button("\\div");
-    Button *timesButton = new Button("\\times");
-    Button *minusButton = new Button("-");
-    Button *plusButton = new Button("+");
+    Button *clearButton = createButton(tr("Clear"), SLOT(buttonClicked()));
+    Button *divisionButton = createButton("\\div", SLOT(buttonClicked()));
+    Button *timesButton = createButton("\\times", SLOT(buttonClicked()));
+    Button *minusButton = createButton("-", SLOT(buttonClicked()));
+    Button *plusButton = createButton("+", SLOT(buttonClicked()));
 
     numericLayout->addWidget(clearButton,    1, 6);
     numericLayout->addWidget(divisionButton, 2, 6);
@@ -66,14 +66,14 @@ void Keyboard::createNumericKeyboard() {
 
 
 
-    Button *leftParButton = new Button("\\left\\right(");
-    Button *rigthParButton = new Button("\\left\\right)");
-    Button *percentButton = new Button("\\%");
-    for (int i = 0; i < NumDigitButtons; ++i) {
-        digitButtons[i] = new Button(QString::number(i));
+    Button *leftParButton = createButton("\\left\\right(", SLOT(buttonClicked()));
+    Button *rigthParButton = createButton("\\left\\right)", SLOT(buttonClicked()));
+    Button *percentButton = createButton("\\%", SLOT(buttonClicked()));
+    for (int i = 0; i < NumDigitButtons; ++i){
+        digitButtons[i] = createButton(QString::number(i), SLOT(buttonClicked()));
     }
-    Button *pointButton = new Button(tr("."));
-    Button *equalButton = new Button("=");
+    Button *pointButton = createButton(tr("."), SLOT(buttonClicked()));
+    Button *equalButton = createButton("=", SLOT(buttonClicked()));
 
 
     numericLayout->addWidget(leftParButton,    1, 3);
@@ -91,4 +91,17 @@ void Keyboard::createNumericKeyboard() {
 
     numericKeyboard->setLayout(numericLayout);
 
+}
+
+Button *Keyboard::createButton(const QString &latexText, const char *member)
+{
+    Button *button = new Button(latexText);
+    connect(button, SIGNAL(clicked()), this, member);
+    return button;
+}
+
+void Keyboard::buttonClicked() {
+    Button *clickedButton = qobject_cast<Button *>(sender());
+    QString value = clickedButton->text();
+    display->setText(display->text() + value);
 }

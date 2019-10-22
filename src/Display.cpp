@@ -7,6 +7,13 @@ Display::Display(QWidget *parent) {
 
 void Display::createDisplay() {
     displayLayout = new QVBoxLayout;
-    input = new QTextEdit;
+    input = new QLineEdit;
     displayLayout->addWidget(input);
+}
+
+QString Display::text() {
+    return input->text();
+}
+void Display::setText(const QString &text) {
+    input->setText(text);
 }

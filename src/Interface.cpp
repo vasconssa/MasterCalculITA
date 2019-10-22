@@ -17,7 +17,7 @@ Interface::~Interface() {
 void Interface::createMainArea() {
     display = new Display;
     auto mainAreaLayout = new QVBoxLayout;
-    keyboard = new Keyboard;
+    keyboard = new Keyboard(display);
 
     mainAreaLayout->addWidget(display);
     mainAreaLayout->addWidget(keyboard);

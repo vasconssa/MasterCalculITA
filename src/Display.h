@@ -6,10 +6,13 @@
 class Display : public QWidget {
 public:
     Display(QWidget *parent = nullptr);
+public:
+    QString text();
+    void setText(const QString& text);
 private:
     void createDisplay();
 private:
-    QTextEdit *input;
+    QLineEdit *input;
     QVBoxLayout *displayLayout;
 };
 

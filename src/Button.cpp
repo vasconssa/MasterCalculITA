@@ -1,7 +1,7 @@
 #include "Button.h"
 
 Button::Button(const QString &latexText, QWidget *parent)
-    : QToolButton(parent)
+    : QToolButton(parent), latexText(latexText)
 {
     setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     mathText.setFontSize(15);
@@ -26,4 +26,8 @@ void Button::paintEvent(QPaintEvent *event) {
 
     mathText.draw(p, Qt::AlignCenter, QRectF(0,0,this->width(), this->height()), false);
 
+}
+
+QString Button::text() {
+    return latexText;
 }

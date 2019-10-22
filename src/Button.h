@@ -14,8 +14,11 @@ public:
     explicit Button(const QString &latexText, QWidget *parent = nullptr);
 
     QSize sizeHint() const override;
+public:
+    QString text();
 private:
     JKQTMathText mathText;
+    QString latexText;
 };
 
 #endif // BUTTON_H
