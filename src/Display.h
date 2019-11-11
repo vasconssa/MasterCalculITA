@@ -2,6 +2,8 @@
 #define DISPLAY_H
 
 #include <QtWidgets>
+#include <glwidget.h>
+#include <jkqtmathtext/jkqtmathtext.h>
 
 class Display : public QWidget {
 public:
@@ -14,6 +16,8 @@ private:
 private:
     QLineEdit *input;
     QVBoxLayout *displayLayout;
+    GLWidget *glWidget;
+    QSplitter *splitter;
 };
 
 #endif
