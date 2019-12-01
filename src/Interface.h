@@ -6,6 +6,7 @@
 #include <QtWidgets>
 #include "Keyboard.h"
 #include "Display.h"
+#include "controller.h"
 
 namespace Ui {
     class Interface;
@@ -29,6 +30,8 @@ private:
         QVBoxLayout *canvasLayout;
 
         QStackedWidget* mainAreaStack;
+        QListWidget *historyListWidget;
+        Controller *controler;
 
 };
 

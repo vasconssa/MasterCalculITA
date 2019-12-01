@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 
 project(MasterCalculITA VERSION 1.0 LANGUAGES CXX)
 
-find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets Xml PrintSupport OpenGL Svg)
+find_package(Qt5 REQUIRED COMPONENTS Core Gui Widgets Xml PrintSupport OpenGL Svg Sql)
 
 set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 
