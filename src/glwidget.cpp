@@ -34,7 +34,6 @@ void GLWidget::paintEvent(QPaintEvent *event)
 void GLWidget::updateParser()
 {
     mathText.setFontSize(35);
-    std::cout << latexText.size() << std::endl;
     mathText.parse("$" + latexText + "$");
     //mathText.parse("$\\left[-\\frac{\\hbar^2}{2m}\\frac{\\partial^2}{\\partial x^2}+V(x)\\right]\\Psi(x)=\\mathrm{i}\\hbar\\frac{\\partial}{\\partial t}\\Psi(x)$");
 }

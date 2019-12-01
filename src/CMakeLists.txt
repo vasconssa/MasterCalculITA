@@ -17,7 +17,11 @@ set(CMAKE_AUTOUIC ON)
 qt5_wrap_ui( UI_HEADERS ${UIS})
 qt5_add_resources( QRCS resources.qrc )
 
+find_package(PythonInterp REQUIRED)
+find_package(PythonLibs ${PYTHON_VERSION_MAJOR}.${PYTHON_VERSION_MINOR} EXACT REQUIRED)
+
 add_executable(${PROJECT_NAME} "main.cpp" ${SRCS} ${C_SRCS} ${HDRS} ${HPPDRS} ${UI_HEADERS} ${QRCS})
 
 
-target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Widgets jkqtcommon jkqtmathtext)
+include_directories(${PYTHON_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} Qt5::Core Qt5::Widgets Qt5::Sql jkqtcommon jkqtmathtext ${PYTHON_LIBRARIES})

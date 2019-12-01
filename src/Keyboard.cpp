@@ -1,6 +1,6 @@
 #include "Keyboard.h"
 
-Keyboard::Keyboard(Display* display, QWidget* parent):display(display) {
+Keyboard::Keyboard(Display* display, Controller *cont, QWidget* parent):display(display), controller(cont) {
     createNumericKeyboard();
     tabWidget = new QTabWidget;
     tabWidget->addTab(numericKeyboard, QIcon(QString(":/resources/images/calculator.png")), "");
@@ -74,6 +74,7 @@ void Keyboard::createNumericKeyboard() {
     }
     Button *pointButton = createButton(tr("."), SLOT(buttonClicked()));
     Button *equalButton = createButton("=", SLOT(buttonClicked()));
+    connect(equalButton, SIGNAL(clicked()), controller, SLOT(equalButtonProcess()));
 
 
     numericLayout->addWidget(leftParButton,    1, 3);
