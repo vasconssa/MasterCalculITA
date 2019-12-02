@@ -47,9 +47,5 @@ void LoginDialog::on_pushButton_Login_clicked()
 
 void LoginDialog::on_pushButton_NewUser_clicked()
 {
-    hide();
-    cd = new CadastroDialog(this);
-
-    cd->show();
 
 }
