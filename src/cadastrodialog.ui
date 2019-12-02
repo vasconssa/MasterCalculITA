@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>LoginDialog</class>
- <widget class="QDialog" name="LoginDialog">
+ <class>CadastroDialog</class>
+ <widget class="QDialog" name="CadastroDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>379</width>
-    <height>395</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,14 +16,14 @@
   <widget class="QGroupBox" name="groupBox">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>120</y>
+     <x>40</x>
+     <y>30</y>
      <width>228</width>
      <height>171</height>
     </rect>
    </property>
    <property name="title">
-    <string>Login</string>
+    <string>Cadastro</string>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_2">
     <item>
@@ -31,7 +31,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QLabel" name="label">
+         <widget class="QLabel" name="label_3">
           <property name="text">
            <string>Usuário</string>
           </property>
@@ -45,7 +45,7 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QLabel" name="label_2">
+         <widget class="QLabel" name="label_4">
           <property name="text">
            <string>Senha   </string>
           </property>
@@ -61,38 +61,11 @@
     <item>
      <widget class="QPushButton" name="pushButton_Login">
       <property name="text">
-       <string>Login</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="Line" name="line">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButton_NewUser">
-      <property name="text">
        <string>Cadastrar</string>
       </property>
      </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QLabel" name="label_Image">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>20</y>
-     <width>301</width>
-     <height>81</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
   </widget>
  </widget>
  <resources/>
