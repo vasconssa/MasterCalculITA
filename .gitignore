@@ -4,3 +4,5 @@ bin/MasterCalculITA
 build/
 
 CMakeLists.txt.user
+
+*.pyc

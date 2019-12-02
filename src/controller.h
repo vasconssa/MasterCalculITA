@@ -14,7 +14,7 @@ class Controller : public QWidget
     Q_OBJECT
 public:
     Controller(Display *disp);
-    int process(const char* input_expression, const char* output_expression);
+    int process(const char* input_expression, QString &output_expression);
     void setHistoryWidget(QListWidget *wd) { history = wd;}
 public slots:
     void equalButtonProcess();

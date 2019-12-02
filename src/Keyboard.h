@@ -18,7 +18,7 @@ private:
 private slots:
     void buttonClicked();
 public:
-    enum { NumDigitButtons = 5 };
+    enum { NumDigitButtons = 10 };
     Button *digitButtons[NumDigitButtons];
     Controller *controller;
 private:

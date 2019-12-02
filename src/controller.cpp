@@ -18,24 +18,72 @@ Controller::Controller(Display *disp):display(disp) {
         qWarning() << "ERROR: " << db.lastError();
     else
         qDebug() << "Database open with success";
+    Py_Initialize();
+    PyRun_SimpleString("import sys");
+    PyRun_SimpleString("sys.path.append(\".\")");
 }
 
-int Controller::process(const char *input_expression, const char *output_expression) {
+int Controller::process(const char *input_expression, QString &output_expression) {
 
     PyObject *pName, *pModule, *pDict, *pFunc;
     PyObject *pArgs, *pValue;
     int i;
 
-    const char * file = "sympy";
-    const char * function = "simplify";
+    const char * file = "use_sympy";
+    const char * func = "process";
 
+    QString db_path = QDir::currentPath();
 
-    Py_Initialize();
     //PyRun_SimpleString("from sympy import *\n");
-    pName = PyUnicode_DecodeFSDefault(file);
+    pName = PyUnicode_FromString(file);
 
     pModule = PyImport_Import(pName);
     Py_DECREF(pName);
+
+    if (pModule != NULL) {
+        pFunc = PyObject_GetAttrString(pModule, func);
+        if (pFunc && PyCallable_Check(pFunc)) {
+            pArgs = PyTuple_New(1);
+            pValue = PyUnicode_FromString(input_expression);
+            if (!pValue) {
+                Py_DECREF(pArgs);
+                Py_DECREF(pModule);
+                fprintf(stderr, "Cannot convert argument\n");
+                return 1;
+            }
+            PyTuple_SetItem(pArgs, 0, pValue);
+            pValue = PyObject_CallObject(pFunc, pArgs);
+            Py_DECREF(pArgs);
+            if (pValue != NULL) {
+                pValue = PyObject_Str(pValue);
+                printf("Result of call: %s\n", PyUnicode_AsUTF8(pValue));
+                Py_ssize_t size;
+                output_expression = QString(PyUnicode_AsUTF8(pValue));
+                printf("Result of call: %s\n", output_expression.toLatin1().data());
+                Py_DECREF(pValue);
+            }
+            else {
+                Py_DECREF(pFunc);
+                Py_DECREF(pModule);
+                PyErr_Print();
+                fprintf(stderr,"Call failed\n");
+                return 1;
+            }
+        }
+        else {
+            if (PyErr_Occurred())
+                PyErr_Print();
+            fprintf(stderr, "Cannot find function \"%s\"\n", func);
+        }
+        Py_XDECREF(pFunc);
+        Py_DECREF(pModule);
+    }
+    else {
+        PyErr_Print();
+        fprintf(stderr, "Failed to load \"%s\"\n", file);
+        return 1;
+    }
+    //Py_Finalize();
 
     return 0;
 
@@ -59,5 +107,11 @@ void Controller::equalButtonProcess() {
         QString expressao = query.value(0).toString();
         history->addItem(expressao);
     }
+    QString output;
+    process(text.toLatin1().data(), output);
+    output.replace("\log", "\log ");
+    qDebug() << QString(output);
+    QString newText = text + "=" + output;
+    display->setText(newText);
 
 }
