@@ -6,11 +6,15 @@
 #include <jkqtmathtext/jkqtmathtext.h>
 
 class Display : public QWidget {
+    Q_OBJECT
 public:
     Display(QWidget *parent = nullptr);
 public:
     QString text();
+public slots:
     void setText(const QString& text);
+    void setFromHistory(QListWidgetItem *item);
+    void clear();
 private:
     void createDisplay();
 private:

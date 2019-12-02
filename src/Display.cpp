@@ -27,3 +27,13 @@ QString Display::text() {
 void Display::setText(const QString &text) {
     input->setText(text);
 }
+
+void Display::setFromHistory(QListWidgetItem *item)
+{
+   input->setText(item->text());
+}
+
+void Display::clear()
+{
+   input->clear();
+}

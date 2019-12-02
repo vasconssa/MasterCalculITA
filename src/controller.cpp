@@ -110,6 +110,9 @@ void Controller::equalButtonProcess() {
     QString output;
     process(text.toLatin1().data(), output);
     output.replace("\log", "\log ");
+    output.replace("\sin", "\sin ");
+    output.replace("\cos", "\cos ");
+    output.replace("\tan", "\tan ");
     qDebug() << QString(output);
     QString newText = text + "=" + output;
     display->setText(newText);

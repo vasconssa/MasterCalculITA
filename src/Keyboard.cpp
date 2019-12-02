@@ -52,7 +52,8 @@ void Keyboard::createNumericKeyboard() {
     numericLayout->addWidget(power2Button,     4, 2);
     numericLayout->addWidget(powerButton,      5, 2);
 
-    Button *clearButton = createButton(tr("Clear"), SLOT(buttonClicked()));
+    Button *clearButton = new Button("Clear");
+    connect(clearButton, SIGNAL(clicked()), display, SLOT(clear()));
     Button *divisionButton = createButton("\\div", SLOT(buttonClicked()));
     Button *timesButton = createButton("\\times", SLOT(buttonClicked()));
     Button *minusButton = createButton("-", SLOT(buttonClicked()));

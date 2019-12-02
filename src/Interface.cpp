@@ -61,6 +61,7 @@ void Interface::createLeftSideBar() {
     auto signalMapper = new QSignalMapper(this);
     connect(functionButton, SIGNAL(clicked()), signalMapper, SLOT(map()));
     connect(calculatorButton, SIGNAL(clicked()), signalMapper, SLOT(map()));
+    connect(userAreaButton, SIGNAL(clicked()), signalMapper, SLOT(map()));
     signalMapper->setMapping(calculatorButton, 0);
     signalMapper->setMapping(functionButton, 1);
     signalMapper->setMapping(userAreaButton, 2);
@@ -74,6 +75,7 @@ void Interface::createLeftSideBar() {
 void Interface::createRightSideBar() {
     auto right = new QVBoxLayout;
     historyListWidget = new QListWidget(this);
+    connect(historyListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem *)),display, SLOT(setFromHistory(QListWidgetItem *)));
     controler->setHistoryWidget(historyListWidget);
     mainAreaStack->setSizePolicy(QSizePolicy::MinimumExpanding,QSizePolicy::MinimumExpanding);
     rightSideBarLayout->addWidget(historyListWidget);
