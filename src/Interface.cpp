@@ -34,6 +34,9 @@ void Interface::createMainArea() {
 
     auto functionAreaWidget = new QWidget;
     mainAreaStack->addWidget(functionAreaWidget);
+
+    auto userAreaWidget = new QWidget;
+    mainAreaStack->addWidget(userAreaWidget);
     canvasLayout->addWidget(mainAreaStack);
 
 }
@@ -41,13 +44,16 @@ void Interface::createMainArea() {
 void Interface::createLeftSideBar() {
     auto left= new QVBoxLayout;
     QGroupBox *groupBox = new QGroupBox();
-    QPushButton *functionButton = new QPushButton("&Functions", this);
+    QPushButton *functionButton = new QPushButton("&Funções Personalizadas", this);
     functionButton->setCheckable(true);
-    QPushButton *calculatorButton = new QPushButton("&Calculator", this);
+    QPushButton *userAreaButton = new QPushButton("&Area do Usuário", this);
+    functionButton->setCheckable(true);
+    QPushButton *calculatorButton = new QPushButton("&Calculadora", this);
     calculatorButton->setCheckable(true);
     calculatorButton->setChecked(true);
     left->addWidget(calculatorButton);
     left->addWidget(functionButton);
+    left->addWidget(userAreaButton);
     left->addStretch(1);
     groupBox->setLayout(left);
     leftSideBarLayout->addWidget(groupBox);
@@ -57,6 +63,7 @@ void Interface::createLeftSideBar() {
     connect(calculatorButton, SIGNAL(clicked()), signalMapper, SLOT(map()));
     signalMapper->setMapping(calculatorButton, 0);
     signalMapper->setMapping(functionButton, 1);
+    signalMapper->setMapping(userAreaButton, 2);
     //groupBox->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Expanding);
 
     connect(signalMapper, SIGNAL(mapped(int)), mainAreaStack, SLOT(setCurrentIndex(int)));
